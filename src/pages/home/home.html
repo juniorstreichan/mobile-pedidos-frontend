@@ -1,18 +1,22 @@
-<ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <h3>Carrinho de compras</h3>
 
-  <p>
-    BIXO PIRULETA <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <img src="assets/imgs/logo-junior.png" alt="Logo">
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+<form>  
+  <ion-item>
+    <ion-label stacked >Email</ion-label>
+    <ion-input type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label stacked>Senha</ion-label>
+    <ion-input type="password"></ion-input>
+  </ion-item>
+<br>
+  <button ion-button block (click)="login()">ENTRAR<ion-icon name=""></ion-icon></button>
+  <button ion-button block outline>REGISTRAR <ion-icon name=""></ion-icon></button>
+</form>
+
 </ion-content>
