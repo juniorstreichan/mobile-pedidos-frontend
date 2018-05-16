@@ -8,11 +8,11 @@
 <form>  
   <ion-item>
     <ion-label stacked >Email</ion-label>
-    <ion-input aria-required="true" [(ngModel)]="credentials.email" type="text"  name="email"></ion-input>
+    <ion-input aria-required="true" [(ngModel)]="creds.email" type="text"  name="email"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label  stacked>Senha</ion-label>
-    <ion-input aria-required="true" [(ngModel)]="credentials.senha" type="password"  name="senha"></ion-input>
+    <ion-input aria-required="true" [(ngModel)]="creds.senha" type="password"  name="senha"></ion-input>
   </ion-item>
 <br>
   <button ion-button block (click)="login()">ENTRAR<ion-icon></ion-icon></button>
