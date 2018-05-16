@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { CredentialsDTO } from './../../models/credentials.dto';
 import { Component } from '@angular/core';
 import { NavController, IonicPage, MenuController } from 'ionic-angular';
@@ -11,12 +12,18 @@ import { NavController, IonicPage, MenuController } from 'ionic-angular';
 })
 export class HomePage {
 
+
+
   credentials: CredentialsDTO = {
     email: "",
     senha: ""
   };
 
-  constructor(public navCtrl: NavController, public menu: MenuController) {
+  constructor(
+    public navCtrl: NavController,
+    public menu: MenuController,
+    public auth: AuthService
+  ) {
 
   }
 
@@ -30,10 +37,11 @@ export class HomePage {
 
 
   login() {
-
-    if (this.credentials.email != '' && this.credentials.senha != '') {
-
-      this.navCtrl.setRoot('CategoriasPage');
-    }
+    this.auth.authenticate(this.credentials).subscribe(
+      response => {
+        console.log(response.headers.get('Authorization'))
+        this.navCtrl.setRoot('CategoriasPage');
+      }, error =>{ }
+    );
   }
 }
