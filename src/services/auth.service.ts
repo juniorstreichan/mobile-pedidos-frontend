@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 @Injectable()
-
-
 export class AuthService {
 
     constructor(public http: HttpClient, public storage: StorageService) {

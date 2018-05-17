@@ -13,7 +13,7 @@ import { CategoriaService } from '../../services/domain/categoria.service';
 })
 export class CategoriasPage {
 
-  bucketUrl:string = API_CONFIG.bucketBaseUrl;
+  bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
   items: CategoriaDTO[];
 
@@ -27,9 +27,8 @@ export class CategoriasPage {
   ionViewDidLoad() {
     this.categoriaService.findAll().subscribe(response => {
       this.items = response;
-    }, error => {
-      this.log(error);
-    });
+    }, error => { }
+    );
   }
 
   private log(arg) {
