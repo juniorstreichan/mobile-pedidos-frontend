@@ -1,4 +1,5 @@
 import { StorageService } from './../services/storage.service';
+import { ClienteService } from './../services/domain/cliente.service';
 import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,7 +33,9 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
     CategoriaService,
     ErrorInterceptorProvider,
     AuthService,
-    StorageService
+    StorageService,
+    ClienteService
+
    
   ]
 })
