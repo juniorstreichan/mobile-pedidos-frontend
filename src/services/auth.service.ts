@@ -24,14 +24,25 @@ export class AuthService {
             });
     }
 
+    refreshToken() {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/auth/refresh_token`,
+            {
+                observe: 'response',
+                responseType: 'text'
+            });
+    }
+
     successfullLogin(authorizationValue: string) {
         let tok = authorizationValue.substring(7);
         let user: localUser = {
             token: tok,
-            email:this.jwtHelper.decodeToken(tok).sub
+            email: this.jwtHelper.decodeToken(tok).sub
         };
         this.storage.setLocalUser(user);
     }
+
+
 
     logout() {
         this.storage.setLocalUser(null);
