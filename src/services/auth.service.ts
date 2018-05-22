@@ -1,6 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { localUser } from './../models/local_user';
 import { API_CONFIG } from './../config/api.config';
-import { HttpClient } from '@angular/common/http';
 import { CredentialsDTO } from './../models/credentials.dto';
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
