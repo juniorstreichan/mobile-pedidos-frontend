@@ -25,7 +25,7 @@ export class SignupPage {
   ) {
     this.formGroup = formBuilder.group({
       nome: [
-        "TESTE",
+        "",
         [
           Validators.required,
           Validators.minLength(5),
@@ -40,14 +40,16 @@ export class SignupPage {
           Validators.required,
           Validators.minLength(11),
           Validators.maxLength(14)
+         
+          
         ]
       ],
       senha: ["", [Validators.required]],
       complemento: ["", []],
-      logradouro: ["", []],
-      numero: ["", []],
+      logradouro: ["", [Validators.required]],
+      numero: ["", [Validators.required]],
       bairro: ["", []],
-      cep: ["", [Validators.required]],
+      cep: ["", [Validators.required, Validators.pattern('\\d{5}-\\d{3}')]],
       telefone1: ["", [Validators.required]],
       telefone2: ["", []],
       telefone3: ["", []],
