@@ -12,12 +12,12 @@
       <ion-label>Nome*</ion-label>
       <ion-input  formControlName="nome" type="text" aria-required="true"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.nome.dirty && formGroup.controls.nome.errors" margin-left><small>Nome Inválido</small> </p>
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['nome'].dirty && formGroup.controls['nome'].errors" margin-left><small>Nome Inválido</small> </p>
     <ion-item>
       <ion-label>Email*</ion-label>
       <ion-input formControlName="email" type="email" aria-required="true"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.email.dirty && formGroup.controls.email.errors" margin-left><small>Email Inválido</small> </p>    
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['email'].dirty && formGroup.controls['email'].errors" margin-left><small>Email Inválido</small> </p>    
     <ion-list>
       <ion-list-header>
         Tipo
@@ -36,17 +36,17 @@
       <ion-label>CPF ou CNPJ</ion-label>
       <ion-input formControlName="cpfOuCnpj" type="text" aria-required="true"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.cpfOuCnpj.dirty && formGroup.controls.cpfOuCnpj.errors" margin-left><small>CPF ou CNPJ Inválido</small> </p>        
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['cpfOuCnpj'].dirty && formGroup.controls['cpfOuCnpj'].errors" margin-left><small>CPF ou CNPJ Inválido</small> </p>        
     <ion-item>
       <ion-label>Senha*</ion-label>
       <ion-input formControlName="senha" type="password" aria-required="true"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.senha.dirty && formGroup.controls.senha.errors" margin-left><small>Senha Inválida</small> </p>            
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['senha'].dirty && formGroup.controls['senha'].errors" margin-left><small>Senha Inválida</small> </p>            
     <ion-item>
       <ion-label>Logradouro*</ion-label>
       <ion-input formControlName="logradouro" type="text"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.logradouro.dirty && formGroup.controls.logradouro.errors" margin-left><small>Logradouro Inválido</small> </p>                
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['logradouro'].dirty && formGroup.controls['logradouro'].errors" margin-left><small>Logradouro Inválido</small> </p>                
     <ion-item>
       <ion-label>Número*</ion-label>
       <ion-input formControlName="numero" type="text"></ion-input>
@@ -63,12 +63,12 @@
       <ion-label stacked>CEP*</ion-label>
       <ion-input formControlName="cep" type="text"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.cep.dirty && formGroup.controls.cep.errors" margin-left><small>CEP Inválido</small> </p>                    
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['cep'].dirty && formGroup.controls['cep'].errors" margin-left><small>CEP Inválido</small> </p>                    
     <ion-item>
       <ion-label stacked>Telefone 1*</ion-label>
       <ion-input formControlName="telefone1" type="text"></ion-input>
     </ion-item>
-   <p class="card-content-ios-danger" *ngIf="formGroup.controls.telefone1.dirty && formGroup.controls.telefone1.errors" margin-left><small>Telefone Inválido</small> </p>                        
+   <p class="card-content-ios-danger" *ngIf="formGroup.controls['telefone1'].dirty && formGroup.controls['telefone1'].errors" margin-left><small>Telefone Inválido</small> </p>                        
     <ion-item>
       <ion-label stacked>Telefone 2</ion-label>
       <ion-input formControlName="telefone2" type="text"></ion-input>

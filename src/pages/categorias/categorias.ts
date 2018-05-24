@@ -1,3 +1,4 @@
+import { ProdutosPage } from './../produtos/produtos';
 import { API_CONFIG } from './../../config/api.config';
 import { CategoriaDTO } from './../../models/categoria.dto';
 import { Component } from '@angular/core';
@@ -30,6 +31,11 @@ export class CategoriasPage {
     }, error => { }
     );
   }
+
+
+showprodutos(){
+  this.navCtrl.push('ProdutosPage');
+}
 
   private log(arg) {
     console.log(arg);
