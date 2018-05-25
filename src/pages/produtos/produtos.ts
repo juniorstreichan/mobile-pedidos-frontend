@@ -1,4 +1,4 @@
-import { ProdutoDetailPage } from './../produto-detail/produto-detail';
+import { ProdutoDetailPage } from "./../produto-detail/produto-detail";
 import { API_CONFIG } from "./../../config/api.config";
 import { ProdutoService } from "./../../services/domain/produto.service";
 import { Component } from "@angular/core";
@@ -44,8 +44,7 @@ export class ProdutosPage {
     }
   }
 
-
-  showDetail(){
-    this.navCtrl.push('ProdutoDetailPage');
+  showDetail(produto_id) {
+    this.navCtrl.push("ProdutoDetailPage", { produto_id: produto_id });
   }
 }
