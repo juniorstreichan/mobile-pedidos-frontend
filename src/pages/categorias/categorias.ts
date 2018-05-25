@@ -28,13 +28,13 @@ export class CategoriasPage {
   ionViewDidLoad() {
     this.categoriaService.findAll().subscribe(response => {
       this.items = response;
-    }, error => { }
+    }, error => {}
     );
   }
 
 
-showprodutos(){
-  this.navCtrl.push('ProdutosPage');
+showprodutos(categoria_id:string){
+  this.navCtrl.push('ProdutosPage',{categoria_id:categoria_id});
 }
 
   private log(arg) {

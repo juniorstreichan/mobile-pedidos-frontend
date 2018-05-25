@@ -1,6 +1,7 @@
 import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { StorageService } from './../services/storage.service';
 import { ClienteService } from './../services/domain/cliente.service';
+import { ProdutoService } from './../services/domain/produto.service';
 import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -36,9 +37,8 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
     ErrorInterceptorProvider,
     AuthService,
     StorageService,
-    ClienteService
-
-   
+    ClienteService,
+    ProdutoService
   ]
 })
 export class AppModule { }
