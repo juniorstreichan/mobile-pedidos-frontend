@@ -6,12 +6,14 @@
     </button>
     <ion-title>Categorias</ion-title>
   </ion-navbar>
-
+  <ion-fab bottom right edge>
+    <button navPush="CartPage" ion-fab mini>
+      <ion-icon name="cart"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-header>
 <ion-content padding>
-  <ion-fab top right edge>
-    <button navPush="CartPage" ion-fab mini> <ion-icon name="cart"></ion-icon> </button>
-  </ion-fab>
+
   <ion-list>
     <button ion-item *ngFor="let item of items" (click)="showprodutos(item.id)">
       <ion-thumbnail item-start>

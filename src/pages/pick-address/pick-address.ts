@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { StorageService } from "./../../services/storage.service";
+import { ClienteService } from "./../../services/domain/cliente.service";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { EnderecoDTO } from "./../../models/endereco.dto";
 import { BaseInput } from "ionic-angular/util/base-input";
@@ -11,42 +13,28 @@ import { BaseInput } from "ionic-angular/util/base-input";
 export class PickAddressPage {
   items: EnderecoDTO[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public clienteService: ClienteService,
+    public storage: StorageService
+  ) {}
 
   ionViewDidLoad() {
-    this.items = [
-      {
-        id: "1",
-        logradouro: "Rua 16",
-        numero: "300",
-        complemento: "bem ali",
-        bairro: "cohab nova",
-        cep: "78025-493",
-        cidade: {
-          id: "33",
-          nome: "Cuiaba",
-          estado: {
-            id: "1",
-            nome: "Mato grosso"
+    let localUser = this.storage.getLocalUser();
+    if (localUser && localUser.email) {
+      this.clienteService.findByEmail(localUser.email).subscribe(
+        response => {
+          this.items = response['enderecos'];
+        },
+        error => {
+          if (error.status == 403) {
+            this.navCtrl.setRoot("HomePage");
           }
         }
-      },
-      {
-        id: "2",
-        logradouro: "Rua treze",
-        numero: "665",
-        complemento: "perto dad dona",
-        bairro: "cohab velha",
-        cep: "78025-493",
-        cidade: {
-          id: "33",
-          nome: "Cuiaba",
-          estado: {
-            id: "1",
-            nome: "Mato grosso"
-          }
-        }
-      }
-    ];
+      );
+    } else {
+      this.navCtrl.setRoot("HomePage");
+    }
   }
 }

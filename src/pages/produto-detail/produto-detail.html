@@ -6,16 +6,16 @@
     </button>
     <ion-title>ProdutoDetail</ion-title>
   </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-  <ion-fab top right edge>
+  <ion-fab bottom right edge>
     <button navPush="CartPage" ion-fab mini>
       <ion-icon name="cart"></ion-icon>
     </button>
   </ion-fab>
+</ion-header>
+
+
+<ion-content padding>
+
   <ion-card>
     <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'" alt="Imagem do Produto">
     <ion-card-content>
