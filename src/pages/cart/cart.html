@@ -24,11 +24,15 @@
 
     </ion-item>
   </ion-list>
-  <ion-item *ngIf="total() > 0">
-    <h2>Total</h2>
-    <ion-badge item-end> {{total() | currency}}</ion-badge>
-
-  </ion-item>
+  <span *ngIf="total() > 0">
+    <ion-item>
+      <h2>Total</h2>
+      <ion-badge item-end> {{total() | currency}}</ion-badge>
+    </ion-item>
+   
+      <button ion-button block color="secondary" (click)="checkout()">Finalizar Pedido</button>
+   
+  </span>
   <ion-item *ngIf="total() <= 0">
     <h2>Seu carrinho está vazio</h2>
 
