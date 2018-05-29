@@ -16,8 +16,22 @@
         <img [src]="item.produto.imageUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>
       <h2>{{item.produto.nome}}</h2>
-      <p>{{item.produto.preco | currency}}</p>
-      <p>{{item.quantidade}}</p>
+      <p>Valor {{item.produto.preco | currency}}</p>
+      <ion-icon class="nolineBreak" name="remove-circle" color="primary" (click)="decreaseQuantity(item.produto)"></ion-icon>
+      <p class="nolineBreak">{{item.quantidade}}</p>
+      <ion-icon name="add-circle" color="primary" (click)="increaseQuantity(item.produto)"></ion-icon>
+      <ion-icon name="trash" item-end color="danger" (click)="removeItem(item.produto)"></ion-icon>
+
     </ion-item>
   </ion-list>
+  <ion-item *ngIf="total() > 0">
+    <h2>Total</h2>
+    <ion-badge item-end> {{total() | currency}}</ion-badge>
+
+  </ion-item>
+  <ion-item *ngIf="total() <= 0">
+    <h2>Seu carrinho está vazio</h2>
+
+  </ion-item>
+  <button ion-button block (click)="goOn()">Continuar comprando</button>
 </ion-content>
