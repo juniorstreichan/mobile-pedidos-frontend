@@ -1,3 +1,4 @@
+import { PedidoService } from './../../services/domain/pedido.service';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { OrderConfirmationPage } from './order-confirmation';
@@ -9,5 +10,8 @@ import { OrderConfirmationPage } from './order-confirmation';
   imports: [
     IonicPageModule.forChild(OrderConfirmationPage),
   ],
+  providers:[
+    PedidoService
+  ]
 })
 export class OrderConfirmationPageModule {}
