@@ -1,4 +1,5 @@
-import { CartPage } from './../cart/cart';
+import { CategoriasPage } from "./../categorias/categorias";
+import { CartPage } from "./../cart/cart";
 import { HomePage } from "./../home/home";
 import { EnderecoDTO } from "./../../models/endereco.dto";
 import { ClienteDTO } from "./../../models/cliente.dto";
@@ -20,6 +21,7 @@ export class OrderConfirmationPage {
   cartItems: CartItem[];
   cliente: ClienteDTO;
   endereco: EnderecoDTO;
+  codPedido: string;
 
   constructor(
     public navCtrl: NavController,
@@ -53,25 +55,32 @@ export class OrderConfirmationPage {
     return list[list.findIndex(x => x.id == id)];
   }
 
-  back(){
-    this.navCtrl.setRoot('CartPage');
-    
+  back() {
+    this.navCtrl.setRoot("CartPage");
+  }
+  home() {
+    this.navCtrl.setRoot("CategoriasPage");
   }
   total(): number {
     return this.cartService.total();
   }
 
   checkout() {
-    this.pedidoService
-      .insert(this.pedido)
-      .subscribe(response => {
+    this.pedidoService.insert(this.pedido).subscribe(
+      response => {
         this.cartService.createOrClearCart();
-        console.log(response.headers.get('location'));
-        
-      }, error => {
+        this.codPedido = this.extractId(response.headers.get("location"));
+      },
+      error => {
         if (error.status == 403) {
-          this.navCtrl.setRoot('HomePage');
+          this.navCtrl.setRoot("HomePage");
         }
-      });
+      }
+    );
+  }
+
+  private extractId(location: string): string {
+    let position = location.lastIndexOf("/");
+    return location.substring(position + 1, location.length);
   }
 }
