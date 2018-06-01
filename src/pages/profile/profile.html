@@ -25,7 +25,9 @@
       <img class="circle" [src]="picture">
     </ion-item>
     <ion-item>
-      <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn"><ion-icon name="photo"></ion-icon> Camera</button>
+      <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn"><ion-icon name="camera"></ion-icon>   Camera</button>
+      <button ion-button  color="secondary" outline block *ngIf="picture" (click)="sendPicture()"  ><ion-icon name="send"></ion-icon>   Enviar</button>
+      <button ion-button color="danger" outline block *ngIf="picture" (click)="cancel()"  ><ion-icon name="cancel"></ion-icon> Cancelar</button>
     </ion-item>
   </ion-card>
 </ion-content>
