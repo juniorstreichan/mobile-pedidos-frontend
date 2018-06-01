@@ -12,7 +12,7 @@ import { ProdutoDTO } from "../../models/produto.dto";
   templateUrl: "produto-detail.html"
 })
 export class ProdutoDetailPage {
-  item: ProdutoDTO;
+  item?: ProdutoDTO;
 
   constructor(
     public navCtrl: NavController,
@@ -37,7 +37,7 @@ export class ProdutoDetailPage {
       this.item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${
         this.item.id
       }.jpg`;
-    });
+    },error => {});
   }
 
   addToCart(produto: ProdutoDTO) {

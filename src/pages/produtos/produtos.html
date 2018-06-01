@@ -3,7 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Produtos</ion-title>
+
+    <!-- <ion-title>Produtos</ion-title> -->
+    <ion-toolbar>
+      <ion-searchbar name="input_pesquisa" (input)="getItems($event)"  (ionClear)="reset()" placeholder="Produtos"></ion-searchbar>
+    </ion-toolbar>
+
   </ion-navbar>
   <ion-fab bottom right edge>
     <button navPush="CartPage" ion-fab mini>
@@ -14,11 +19,11 @@
 
 
 <ion-content padding>
-<ion-refresher (ionRefresh)="doRefresh($event)">
-<ion-refresher-content></ion-refresher-content>
-</ion-refresher>
+  <ion-refresher (ionRefresh)="doRefresh($event);reset()">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="showDetail(item.id)">
+    <button ion-item *ngFor="let item of itemsModel" (click)="showDetail(item.id)">
       <ion-thumbnail item-start>
         <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>
@@ -26,4 +31,7 @@
       <p>{{item.preco | currency}}</p>
     </button>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

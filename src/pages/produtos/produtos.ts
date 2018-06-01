@@ -16,7 +16,9 @@ import { ProdutoDTO } from "../../models/produto.dto";
   templateUrl: "produtos.html"
 })
 export class ProdutosPage {
-  items: ProdutoDTO[];
+  items: ProdutoDTO[] = [];
+  itemsModel: ProdutoDTO[] = [];
+  private page: number = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -32,11 +34,16 @@ export class ProdutosPage {
   loadData() {
     let loader = this.presentLoading();
     let categoria_id = this.navParams.get("categoria_id");
-    this.produtoService.findByCategoria(categoria_id).subscribe(
+    this.produtoService.findByCategoria(categoria_id, this.page, 6).subscribe(
       response => {
-        this.items = response["content"];
+        let start = this.items.length;
+        this.items = this.items.concat(response["content"]);
+        this.itemsModel = this.items;
+        let end = this.items.length - 1;
+        console.log(response["content"]);
+        console.log(this.itemsModel);
         loader.dismiss();
-        this.loadImageUrls();
+        this.loadImageUrls(start, end);
       },
       error => {
         loader.dismiss();
@@ -44,8 +51,8 @@ export class ProdutosPage {
     );
   }
 
-  loadImageUrls() {
-    for (var i = 0; i < this.items.length; i++) {
+  loadImageUrls(start: number, end: number) {
+    for (var i = start; i < end; i++) {
       let item = this.items[i];
       this.produtoService.getSmallImageFromBucket(item.id).subscribe(
         response => {
@@ -71,9 +78,35 @@ export class ProdutosPage {
   }
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.items = [];
     this.loadData();
     setTimeout(() => {
       refresher.complete();
+    }, 1000);
+  }
+
+  getItems(ev: any = "") {
+    let val = ev.target.value;
+    this.itemsModel = [];
+    if (val && val.trim() != "") {
+      this.itemsModel = this.items.filter(item => {
+        return item.nome.toLowerCase().indexOf(val.toLowerCase()) > -1;
+      });
+    } else {
+      this.itemsModel = this.items;
+    }
+  }
+
+  reset() {
+    this.itemsModel = this.items;
+  }
+
+  doInfinite(infiniteScroll: any) {
+    this.page++;
+    this.loadData();
+    setTimeout(() => {
+      infiniteScroll.complete();
     }, 1000);
   }
 }
