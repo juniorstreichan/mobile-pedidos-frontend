@@ -7,6 +7,8 @@ import { Component } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { StorageService } from "../../services/storage.service";
 import { CameraOptions, Camera } from "@ionic-native/camera";
+import { ImageUtilService } from "../../services/image-util.service";
+import { DomSanitizer } from "@angular/platform-browser";
 
 @IonicPage()
 @Component({
@@ -17,18 +19,24 @@ export class ProfilePage {
   cliente: ClienteDTO;
   picture: string; //base64 | binário
   cameraOn: boolean = false;
+  profileImage;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: StorageService,
     public clienteService: ClienteService,
-    public camera: Camera
-  ) {}
+    public camera: Camera,
+    public imageService: ImageUtilService,
+    public sanitizer: DomSanitizer
+  ) {
+    this.profileImage = "assets/imgs/avatar-blank.png";
+  }
 
   ionViewDidLoad() {
     this.loadData();
   }
+
   private loadData() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
@@ -47,14 +55,20 @@ export class ProfilePage {
       this.navCtrl.setRoot("HomePage");
     }
   }
+
   getImageIfExists() {
     this.clienteService.getImageFromBucket(this.cliente.id).subscribe(
       response => {
-        this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${
-          this.cliente.id
-        }.jpg`;
+        this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg`;
+
+        this.imageService.blobToDataUri(response).then(dataUrl => {
+          let img: string = dataUrl as string;
+          this.profileImage = this.sanitizer.bypassSecurityTrustUrl(img);
+        });
       },
-      error => {}
+      error => {
+        this.profileImage = "assets/imgs/avatar-blank.png";
+      }
     );
   }
 
@@ -79,15 +93,16 @@ export class ProfilePage {
   }
 
   sendPicture() {
-    this.clienteService.uploadPicture(this.picture).subscribe(response => {
-      this.picture = null;
-      this.loadData();
-    },error=>{
-
-    });
+    this.clienteService.uploadPicture(this.picture).subscribe(
+      response => {
+        this.picture = null;
+        this.getImageIfExists();
+      },
+      error => {}
+    );
   }
 
-  cancel(){
+  cancel() {
     this.picture = null;
   }
 }
