@@ -3,20 +3,20 @@
 
   <img src="assets/imgs/logo-buy.png" alt="Logo">
 
-  <form>
+  <form [formGroup]="formGroup">
     <ion-item>
       <ion-label stacked>Email</ion-label>
-      <ion-input center aria-required="true" [(ngModel)]="creds.email" type="text" name="email"  ></ion-input>
+      <ion-input formControlName="email" center aria-required="true" [(ngModel)]="creds.email" type="email" name="email"  ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label stacked>Senha</ion-label>
-      <ion-input aria-required="true" [(ngModel)]="creds.senha" type="password" name="senha"  ></ion-input>
+      <ion-input aria-required="true" formControlName="senha" [(ngModel)]="creds.senha" type="password" name="senha"  ></ion-input>
     </ion-item>
     <br>
-    <button ion-button block (click)="login()">ENTRAR
+    <button ion-button block [disabled]="formGroup.invalid" (click)="login()">ENTRAR
       <ion-icon></ion-icon>
     </button>
   </form>
-  <button ion-button block outline (click)="signup()">REGISTRAR</button>
+  <button ion-button block outline  (click)="signup()">REGISTRAR</button>
 
 </ion-content>
